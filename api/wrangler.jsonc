@@ -1,0 +1,12 @@
+{
+  "name": "vetra-api",
+  "main": "./worker.js",
+  "compatibility_date": "2026-11-25",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vetra-users",
+      "database_id": "40ce28ae-e41c-498e-a916-940d9975375b"
+    }
+  ]
+}

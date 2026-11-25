@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title">
+  <title id="title">Símbolo Vetra</title>
+  <rect width="200" height="200" rx="46" fill="#10243A"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M82 38 126 148 170 38" stroke="#35D6B0" stroke-width="19"/>
+    <path d="M31 38 75 148 119 38" stroke="#2674E8" stroke-width="19"/>
+    <path d="M75 148 126 148" stroke="#F6B84A" stroke-width="19"/>
+  </g>
+</svg>
