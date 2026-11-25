@@ -12,7 +12,11 @@ export async function onRequestGet({ request, env }) {
     : today;
 
   let rows;
-  if (view === "history") {
+  if (view === "matchable") {
+    const activityDate = /^\d{4}-\d{2}-\d{2}$/.test(url.searchParams.get("date") || "") ? url.searchParams.get("date") : "";
+    if (!activityDate) return reply({ error: "Informe o dia da atividade." }, 400);
+    rows = await env.DB.prepare("SELECT w.id,w.workout_date,w.title,w.modality,w.status FROM workouts w WHERE w.athlete_id=? AND w.status IN ('released','completed') AND w.workout_date=? ORDER BY w.created_at DESC LIMIT 30").bind(user.user_id, activityDate).all();
+  } else if (view === "history") {
     rows = await env.DB.prepare("SELECT w.id,w.workout_date,w.modality,w.title,w.prescription,w.duration_minutes,w.distance_km,w.status,u.name AS trainer_name FROM workouts w JOIN users u ON u.id=w.trainer_id WHERE w.athlete_id=? AND w.status IN ('completed','missed') ORDER BY w.workout_date DESC,w.created_at DESC LIMIT 100").bind(user.user_id).all();
   } else if (view === "calendar") {
     rows = await env.DB.prepare("SELECT w.id,w.workout_date,w.modality,w.title,w.prescription,w.duration_minutes,w.distance_km,w.status,u.name AS trainer_name FROM workouts w JOIN users u ON u.id=w.trainer_id WHERE w.athlete_id=? AND w.workout_date>=? AND w.workout_date<date(?,'+7 day') AND w.status IN ('released','completed','missed') ORDER BY w.workout_date,w.created_at").bind(user.user_id, start, start).all();

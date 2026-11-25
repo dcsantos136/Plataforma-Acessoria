@@ -25,8 +25,22 @@ O painel apresenta dados reais do D1 e estados vazios quando a equipe ainda não
 - Registro de conclusão com duração e distância realizadas.
 - Envio de feedback e percepção de esforço para treinos concluídos.
 - Área de evolução e configurações da conta.
+- Conexão com Strava, sincronização manual de resumos de atividade e associação de sessão ao treino prescrito no mesmo dia.
 
-As APIs do atleta validam o papel da sessão e consultam ou alteram somente os treinos vinculados à própria conta.
+As APIs do atleta validam o papel da sessão e consultam ou alteram somente os treinos vinculados à própria conta. Dados vindos do relógio ficam isolados por atleta; a Vetra importa resumos, não rotas GPS.
+
+### Relógios e aplicativos
+
+A primeira integração usa o Strava como ponte. Relógios e aplicativos que o atleta já sincroniza com o Strava podem fornecer atividades à Vetra, conforme o suporte e a configuração de cada serviço. O atleta conecta a própria conta, inicia a sincronização e pode revogar o acesso pela Vetra. A integração importa atividades dos últimos 90 dias, com data local, modalidade, duração, distância, frequência cardíaca média/máxima e calorias quando fornecidas. A atividade só conclui um treino depois que o atleta a associa a uma sessão prescrita para o mesmo dia.
+
+Para ativar na produção:
+
+1. Crie um app no portal de desenvolvedores do Strava e informe `plataforma-acessoria.pages.dev` como domínio de callback.
+2. Cadastre estes Secrets no Cloudflare Pages: `STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET` e `WEARABLES_ENCRYPTION_KEY`.
+3. `WEARABLES_ENCRYPTION_KEY` deve ser Base64 de exatamente 32 bytes aleatórios. Tokens de acesso e renovação ficam criptografados no D1 com AES-GCM; não coloque essas chaves no Git ou no chat.
+4. Aplique também `migrations/0005_wearable_integrations.sql` ao D1 e publique novamente.
+
+O callback OAuth é `https://plataforma-acessoria.pages.dev/api/athlete/integrations/strava/callback`. O consentimento solicita leitura de atividades, incluindo as privadas, para que o atleta possa trazer seu próprio histórico. A interface não importa localização ou mapas. Garmin Connect APIs empresariais exigem acesso/aprovação própria; HealthKit precisa de um app iOS com entitlement e permissões do sistema. Essas integrações nativas podem ser adicionadas depois.
 
 ## Cadastro e login
 
@@ -57,7 +71,7 @@ A pasta functions/ implementa as rotas de API. O arquivo wrangler.jsonc e as con
 
 Para preparar outro ambiente Cloudflare, aplique as migrações na seguinte ordem:
 
-1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql e migrations/0004_assessoria_management.sql.
+1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql e migrations/0005_wearable_integrations.sql.
 2. Cadastre o binding D1 DB no Pages em Settings > Bindings.
 3. Cadastre as variáveis e Secrets OAuth no Pages e publique novamente.
 
