@@ -32,11 +32,12 @@
           <div class="field"><label for="email">E-mail</label><div class="input"><span>✉</span><input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required></div><small class="field-error"></small></div>
           <div class="field"><label for="password">Senha</label><div class="input"><span>♙</span><input id="password" type="password" autocomplete="current-password" placeholder="Sua senha" required><button type="button" id="toggle-password" aria-label="Mostrar senha">◉</button></div><small class="hint signup-only">Use pelo menos 8 caracteres.</small><small class="field-error"></small></div>
           <label class="terms signup-only"><input id="terms" type="checkbox"><span class="check"></span><span>Li e aceito os <a href="#termos">Termos de Uso</a> e a <a href="#privacidade">Política de Privacidade</a>.</span></label>
+          <label class="invite-consent is-hidden" id="invite-consent-wrap"><input id="invite-consent" type="checkbox"><span>Ao aceitar, autorizo compartilhar meu perfil e as informações que eu preencher, inclusive observações de saúde, com <b id="invite-trainer-name">meu treinador</b> para orientar meus treinos.</span></label>
           <button class="submit" id="auth-submit" type="submit">Criar minha conta <span>→</span></button>
           <p class="feedback" id="auth-feedback" aria-live="polite"></p>
         </form>
         <div class="divider"><span>ou continue com</span></div>
-        <div class="social-actions">
+        <div class="social-actions" id="social-actions">
           <button class="social-button" data-provider="google"><span class="google-mark">G</span><span>Google</span></button>
           <button class="social-button" data-provider="apple"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M16.6 11.8c0-2 1.6-3 1.7-3.1a3.8 3.8 0 0 0-3-1.6c-1.3-.1-2.5.8-3.2.8-.7 0-1.7-.8-2.8-.8a4.2 4.2 0 0 0-3.5 2.1c-1.5 2.6-.4 6.4 1 8.5.7 1 1.5 2.2 2.6 2.2 1 0 1.4-.7 2.7-.7s1.7.7 2.8.7 1.8-1 2.5-2.2c.8-1.1 1.1-2.3 1.1-2.4-.1 0-2-.8-2-3.5ZM14.5 5.7c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.7-.9 2.6 1 0 1.9-.5 2.5-1.2Z"/></svg><span>Apple</span></button>
         </div>
@@ -61,7 +62,7 @@
         <button class="nav-item" data-page="feedback"><span>◌</span>Feedbacks <i id="feedback-count"></i></button>
         <button class="nav-item" data-page="reports"><span>↗</span>Relatórios</button>
       </nav>
-      <div class="sidebar-bottom"><button class="nav-item" data-page="settings"><span>⚙</span>Configurações</button><div class="user-mini"><div class="avatar" id="side-avatar">V</div><div><b id="side-name">Vetra</b><small id="user-role-label">Treinador Vetra</small></div><button id="logout" aria-label="Sair">↪</button></div></div>
+      <div class="sidebar-bottom"><button class="nav-item" data-page="profile" id="profile-nav"><span>♙</span>Meu perfil</button><button class="nav-item" data-page="settings"><span>⚙</span>Configurações</button><div class="user-mini"><div class="avatar" id="side-avatar">V</div><div><b id="side-name">Vetra</b><small id="user-role-label">Treinador Vetra</small></div><button id="logout" aria-label="Sair">↪</button></div></div>
     </aside>
     <main class="workspace">
       <header class="topbar"><button id="mobile-menu" aria-label="Abrir menu">☰</button><div class="crumb">Vetra <span>/</span> <b id="page-crumb">Visão geral</b></div><div class="top-actions"><span class="today-label" id="today-label"></span><button class="icon-button" aria-label="Notificações">♧</button><div class="avatar top-avatar" id="top-avatar">V</div></div></header>

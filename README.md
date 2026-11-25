@@ -11,7 +11,8 @@ As migrações migrations/0002_auth_and_trainer.sql e migrations/0003_role_profi
 ## Recursos do treinador
 
 - Visão geral com atletas, próximos treinos, sessões concluídas e distância registrada.
-- Lista de atletas e vínculo de uma conta de atleta existente.
+- Convite de atleta por e-mail, com link de uso único válido por sete dias.
+- Perfil compartilhado do atleta com data de nascimento, peso, altura e observações de saúde, disponível ao treinador somente após autorização do atleta.
 - Criação de ciclos e prescrição de sessões.
 - Agenda semanal, liberação de treino, acompanhamento de feedback e indicadores.
 
@@ -25,6 +26,7 @@ O painel apresenta dados reais do D1 e estados vazios quando a equipe ainda não
 - Registro de conclusão com duração e distância realizadas.
 - Envio de feedback e percepção de esforço para treinos concluídos.
 - Área de evolução e configurações da conta.
+- Conclusão do perfil do atleta convidado, com controles para revisar ou retirar o compartilhamento de dados pessoais e observações de saúde.
 - Conexão com Strava, sincronização manual de resumos de atividade e associação de sessão ao treino prescrito no mesmo dia.
 
 As APIs do atleta validam o papel da sessão e consultam ou alteram somente os treinos vinculados à própria conta. Dados vindos do relógio ficam isolados por atleta; a Vetra importa resumos, não rotas GPS.
@@ -41,6 +43,18 @@ Para ativar na produção:
 4. Aplique também `migrations/0005_wearable_integrations.sql` ao D1 e publique novamente.
 
 O callback OAuth é `https://plataforma-acessoria.pages.dev/api/athlete/integrations/strava/callback`. O consentimento solicita leitura de atividades, incluindo as privadas, para que o atleta possa trazer seu próprio histórico. A interface não importa localização ou mapas. Garmin Connect APIs empresariais exigem acesso/aprovação própria; HealthKit precisa de um app iOS com entitlement e permissões do sistema. Essas integrações nativas podem ser adicionadas depois.
+
+### Convites por e-mail e perfil do atleta
+
+O convite é enviado pelo serviço transacional [Resend](https://resend.com/docs/api-reference/emails/send-email). Para ativá-lo, verifique um domínio no Resend e cadastre no Cloudflare Pages:
+
+- Secret `RESEND_API_KEY` com a chave do Resend.
+- Variável `EMAIL_FROM` com o remetente autorizado, por exemplo `Vetra <convites@seudominio.com.br>`.
+- Variável `APP_BASE_URL` com a URL pública da aplicação.
+
+Depois de salvar as configurações, publique novamente. O convite vence em sete dias e o token bruto aparece somente no link enviado; o banco guarda o hash. O atleta precisa entrar ou criar a conta com o e-mail convidado e aceitar o compartilhamento antes da criação do vínculo. O treinador vê os dados apenas enquanto o consentimento estiver ativo. Se o atleta retirar a autorização, as observações de saúde são apagadas e os dados do perfil deixam de ser exibidos ao treinador.
+
+As observações sobre saúde são informações sensíveis. Colete somente o necessário para adaptar o treino e mantenha uma política de privacidade compatível com o uso desses dados.
 
 ## Cadastro e login
 
@@ -71,9 +85,9 @@ A pasta functions/ implementa as rotas de API. O arquivo wrangler.jsonc e as con
 
 Para preparar outro ambiente Cloudflare, aplique as migrações na seguinte ordem:
 
-1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql e migrations/0005_wearable_integrations.sql.
+1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql, migrations/0005_wearable_integrations.sql e migrations/0006_athlete_invites_and_profile.sql.
 2. Cadastre o binding D1 DB no Pages em Settings > Bindings.
-3. Cadastre as variáveis e Secrets OAuth no Pages e publique novamente.
+3. Cadastre as variáveis e Secrets de OAuth, Strava e e-mail necessários no Pages e publique novamente.
 
 O cadastro e o login por senha ficam ativos após as migrações e a ligação do D1. Login social permanece desabilitado até que os respectivos Secrets sejam cadastrados.
 

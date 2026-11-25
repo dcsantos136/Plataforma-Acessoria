@@ -1,4 +1,4 @@
-import { reply, parseJson, rateLimit, passwordHash, safeEqual, randomToken, createSession, sameOrigin } from "../../_lib/auth.js";
+import { reply, parseJson, rateLimit, passwordHash, createSession, sameOrigin, sha256 } from "../../_lib/auth.js";
 export async function onRequestPost({ request, env }) {
   if (!await sameOrigin(request, env)) return reply({ error: "Origem não autorizada." }, 403);
   if (!await rateLimit(env, request, "register", 8)) return reply({ error: "Muitas tentativas. Aguarde alguns minutos." }, 429, { "retry-after": "900" });
@@ -10,6 +10,12 @@ export async function onRequestPost({ request, env }) {
   if (new TextEncoder().encode(password).length < 8 || new TextEncoder().encode(password).length > 128) return reply({ error: "A senha deve ter entre 8 e 128 bytes." }, 400);
   if (!["treinador(a)", "atleta"].includes(role)) return reply({ error: "Escolha um perfil válido." }, 400);
   if (d.termsAccepted !== true) return reply({ error: "Aceite os termos para continuar." }, 400);
+  const invitationToken=String(d.invitationToken || "");
+  if (invitationToken) {
+    if (invitationToken.length<32 || invitationToken.length>128 || role!=="atleta" || d.shareProfile!==true) return reply({error:"Convite ou consentimento inválido."},400);
+    const invite=await env.DB.prepare("SELECT 1 AS valid FROM athlete_invitations WHERE token_hash=? AND email_normalized=? AND status='pending' AND expires_at>?").bind(await sha256(invitationToken),normalized,new Date().toISOString()).first();
+    if (!invite) return reply({error:"Este convite não é válido ou expirou."},404);
+  }
   const salt = crypto.getRandomValues(new Uint8Array(16));
   try {
     const id = crypto.randomUUID(), hash = await passwordHash(password, salt);
