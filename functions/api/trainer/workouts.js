@@ -20,7 +20,6 @@ export async function onRequestPost({ request, env }) {
     .bind(id,user.user_id,athleteId,date,modality,title,prescription,duration,distance).run();
   return reply({ workout: { id, date, modality, title, status:"planned" } }, 201);
 }
-import { reply, requireUser, sameOrigin, parseJson } from "../../_lib/auth.js";
 export async function onRequestPatch({ request, env }) {
   if (!await sameOrigin(request, env)) return reply({ error:"Origem não autorizada." },403);
   const { user, error }=await requireUser(request,env,"treinador(a)"); if(error)return error;
