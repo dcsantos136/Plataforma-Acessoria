@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title">
+  <title id="title">Vetra — versão para fundo escuro</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M74 25 119 124 164 25" stroke="#35D6B0" stroke-width="18"/>
+    <path d="M40 25 85 124 130 25" stroke="#2674E8" stroke-width="18"/>
+    <path d="M85 124 119 124" stroke="#F6B84A" stroke-width="18"/>
+  </g>
+  <text x="205" y="119" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="700" letter-spacing="-4">vetra</text>
+</svg>
