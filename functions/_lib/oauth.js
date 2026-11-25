@@ -22,7 +22,7 @@ export async function beginOAuth(request, env, provider) {
   authUrl.searchParams.set("state", state);
   authUrl.searchParams.set("nonce", nonce);
   if (provider === "google") {
-    authUrl.searchParams.set("code_challenge", b64u(await crypto.subtle.digest("SHA-256", enc.encode(verifier))));
+    authUrl.searchParams.set("code_challenge", b64u(new Uint8Array(await crypto.subtle.digest("SHA-256", enc.encode(verifier)))));
     authUrl.searchParams.set("code_challenge_method", "S256");
     authUrl.searchParams.set("prompt", "select_account");
   } else {
