@@ -17,6 +17,17 @@ As migrações migrations/0002_auth_and_trainer.sql e migrations/0003_role_profi
 
 O painel apresenta dados reais do D1 e estados vazios quando a equipe ainda não tem registros.
 
+## Recursos do atleta
+
+- Painel pessoal com próximos treinos, sessões recentes, duração e distância dos últimos sete dias.
+- Lista de treinos liberados e histórico de sessões concluídas ou não realizadas.
+- Agenda semanal com os treinos liberados pelo treinador.
+- Registro de conclusão com duração e distância realizadas.
+- Envio de feedback e percepção de esforço para treinos concluídos.
+- Área de evolução e configurações da conta.
+
+As APIs do atleta validam o papel da sessão e consultam ou alteram somente os treinos vinculados à própria conta.
+
 ## Cadastro e login
 
 Cadastro e login por e-mail usam uma sessão opaca em cookie HttpOnly, Secure em HTTPS, SameSite=Lax, sete dias de duração e hash do token guardado no D1. A senha nunca é guardada em texto puro; é derivada com PBKDF2-HMAC-SHA256, salt exclusivo e 600.000 iterações. Há limite por endereço de rede para tentativas de autenticação.
