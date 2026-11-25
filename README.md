@@ -53,11 +53,11 @@ A Apple exige uma conta de desenvolvedor, Services ID associado a um App ID habi
 
 ## Publicação no Cloudflare Pages
 
-A pasta functions/ implementa as rotas de API. O arquivo wrangler.jsonc e as configurações do Cloudflare Pages vinculam a aplicação ao D1 vetra-users, usando a ligação DB. A pasta raiz serve a interface estática. A ligação DB e as migrações 0002 e 0003 já foram aplicadas na conta Cloudflare deste projeto.
+A pasta functions/ implementa as rotas de API. O arquivo wrangler.jsonc e as configurações do Cloudflare Pages vinculam a aplicação ao D1 vetra-users, usando a ligação DB. A pasta raiz serve a interface estática. As migrações 0002, 0003 e 0004 criam autenticação, perfis, assessorias e equipes de treinadores.
 
 Para preparar outro ambiente Cloudflare, aplique as migrações na seguinte ordem:
 
-1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql e migrations/0003_role_profiles.sql.
+1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql e migrations/0004_assessoria_management.sql.
 2. Cadastre o binding D1 DB no Pages em Settings > Bindings.
 3. Cadastre as variáveis e Secrets OAuth no Pages e publique novamente.
 
@@ -65,4 +65,4 @@ O cadastro e o login por senha ficam ativos após as migrações e a ligação d
 
 ## Observação de escopo
 
-O MVP entrega o espaço do treinador e a criação de contas. O app do atleta, recuperação de senha, confirmação de e-mail e termos jurídicos finais são etapas futuras.
+O módulo de gestão permite ao responsável editar os dados da assessoria, vincular treinadores já cadastrados e administrar seus vínculos. Cada treinador mantém seus próprios atletas e treinos; os dados são agregados na visão da equipe.
