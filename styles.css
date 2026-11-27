@@ -244,3 +244,6 @@ body[data-role="trainer"] .next-action .primary-button:hover{background:#1e3d33}
 #auth-view .auth-panel footer{border-color:#ffffff25;color:#afc2d4}
 #auth-view .auth-panel footer a{color:#afcfe8}
 @media(max-width:640px){#auth-view .auth-shell{background:radial-gradient(ellipse at 81% 12%,#1c4462 0%,#132f49 35%,#10283f 73%)}#auth-view .auth-panel{margin:0;min-height:100dvh;border:0;border-radius:0;background:transparent;box-shadow:none;padding:20px 20px 16px}#auth-view .mobile-logo{content:url("assets/vetra-logo-branco.svg")}}
+#auth-view .logo-link{display:block;width:fit-content;line-height:0}
+#auth-view .mobile-logo-link{display:none}
+@media(max-width:640px){#auth-view .mobile-logo-link{display:block;width:112px;margin:0 auto 27px}#auth-view .mobile-logo{display:block;width:100%;height:auto;margin:0}}
