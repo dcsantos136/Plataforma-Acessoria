@@ -3,7 +3,7 @@ import { sealToken, syncStrava } from "../../../../_lib/wearables.js";
 
 const stateCookieName = request => new URL(request.url).protocol === "https:" ? "__Host-vetra_strava_state" : "vetra_strava_state";
 const clearStateCookie = request => stateCookieName(request) + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + (new URL(request.url).protocol === "https:" ? "; Secure" : "");
-const redirect = (request, env, status) => new Response(null, { status: 303, headers: { location: baseUrl(request, env) + "/?integration=" + encodeURIComponent(status) + "#integrations", "set-cookie": clearStateCookie(request), "cache-control": "no-store" } });
+const redirect = (request, env, status) => new Response(null, { status: 303, headers: { location: baseUrl(request, env) + "/app.html?integration=" + encodeURIComponent(status) + "#integrations", "set-cookie": clearStateCookie(request), "cache-control": "no-store" } });
 
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);

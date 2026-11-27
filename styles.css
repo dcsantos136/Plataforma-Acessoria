@@ -204,3 +204,43 @@ body[data-role="trainer"] .next-action .primary-button:hover{background:#1e3d33}
 .pending-invite-row small{color:#8995a2;font-size:8px}
 .pending-invite-row .text-action{white-space:nowrap}
 @media(max-width:640px){.athlete-profile-card .detail-card{grid-template-columns:1fr}.health-facts{grid-template-columns:1fr 1fr}.pending-invite-row{align-items:flex-start;flex-wrap:wrap}.pending-invite-row .text-action{margin-left:44px}}
+
+/* Identidade aprovada da Vetra: azul-marinho e verde-lima no acesso real. */
+#auth-view .auth-shell{background:radial-gradient(ellipse at 81% 91%,#1c4462 0%,#132f49 35%,#10283f 73%)}
+#auth-view .brand{background:transparent}
+#auth-view .brand:after{border-color:#ffffff16;box-shadow:0 0 0 3rem #ffffff08,0 0 0 6rem #ffffff05}
+#auth-view .eyebrow i{background:#c5f044;box-shadow:0 0 0 4px #c5f04422}
+#auth-view .brand h1 em,#auth-view .quote b{color:#c5f044}
+#auth-view .brand-foot{color:#afc2d4}
+#auth-view .auth-panel{min-height:0;margin:clamp(1rem,4vw,3.5rem) clamp(1rem,5vw,4rem);padding:clamp(1.25rem,3vw,2rem);border:1px solid #ffffff22;border-radius:1.1rem;background:linear-gradient(145deg,#1a3852f2,#18334ceb);box-shadow:0 1.5rem 4rem #07172755;color:#f6faff;backdrop-filter:blur(14px)}
+#auth-view .auth-heading h2{color:#f7faff}
+#auth-view .auth-heading p{color:#b8cbdd}
+#auth-view .step{color:#8dcaec}
+#auth-view .role-title,#auth-view .field label{color:#edf5fc}
+#auth-view .role{border-color:#ffffff30;background:#10283f90;color:#f6faff}
+#auth-view .role.active{border-color:#c5f044;background:#ffffff14;box-shadow:inset 0 0 0 1px #c5f04433}
+#auth-view .role-icon{background:#ffffff12;color:#c5f044}
+#auth-view .role small{color:#b5c8da}
+#auth-view .radio{border-color:#9aafc1}
+#auth-view .role.active .radio{border-color:#c5f044}
+#auth-view .input{border-color:#7891a6;background:#10283f;color:#f7faff}
+#auth-view .input:focus-within{border-color:#c5f044;box-shadow:0 0 0 3px #c5f04426}
+#auth-view .input input{background:transparent;color:#f7faff}
+#auth-view .input input::placeholder{color:#a7bbcd}
+#auth-view .input>span,#auth-view .input button{color:#b8cbdc}
+#auth-view .hint{color:#b5c8da}
+#auth-view .terms{color:#c2d2e1}
+#auth-view .check{border-color:#9aafc1}
+#auth-view .terms input:checked+.check{background:#c5f044;border-color:#c5f044}
+#auth-view .terms input:checked+.check:after{color:#10283f}
+#auth-view .terms a,#auth-view .auth-switch button{color:#c5f044}
+#auth-view .submit{background:#c5f044;color:#10283f;box-shadow:0 5px 18px #c5f04425}
+#auth-view .submit:hover{background:#d2f56c}
+#auth-view .divider{color:#b5c8da}
+#auth-view .divider:before,#auth-view .divider:after{background:#ffffff30}
+#auth-view .social-button{border-color:#ffffff30;background:#10283f;color:#f6faff}
+#auth-view .social-button:hover:not(:disabled){background:#183650;border-color:#7891a6}
+#auth-view .provider-note,#auth-view .auth-switch{color:#b5c8da}
+#auth-view .auth-panel footer{border-color:#ffffff25;color:#afc2d4}
+#auth-view .auth-panel footer a{color:#afcfe8}
+@media(max-width:640px){#auth-view .auth-shell{background:radial-gradient(ellipse at 81% 12%,#1c4462 0%,#132f49 35%,#10283f 73%)}#auth-view .auth-panel{margin:0;min-height:100dvh;border:0;border-radius:0;background:transparent;box-shadow:none;padding:20px 20px 16px}#auth-view .mobile-logo{content:url("assets/vetra-logo-branco.svg")}}

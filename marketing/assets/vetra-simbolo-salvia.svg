@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-labelledby="title desc">
+  <title id="title">Símbolo Vetra · Salvia</title>
+  <desc id="desc">Símbolo original Vetra com duas trilhas convergentes, nas cores da direção Salvia.</desc>
+  <rect width="200" height="200" rx="46" fill="#203C33"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M82 38 126 148 170 38" stroke="#2DA487" stroke-width="18"/>
+    <path d="M31 38 75 148 119 38" stroke="#2F70B7" stroke-width="18"/>
+    <path d="M75 148 126 148" stroke="#9DCCA9" stroke-width="18"/>
+  </g>
+</svg>

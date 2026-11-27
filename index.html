@@ -1,75 +1,18 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#152c25">
-  <meta name="description" content="Vetra — gestão de treinos e acompanhamento de atletas.">
-  <title>Vetra — Treino com direção</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<div id="auth-view">
-  <main class="auth-shell">
-    <aside class="brand">
-      <img class="logo" src="assets/vetra-logo-branco.svg" alt="Vetra — Treino com direção">
-      <div class="brand-copy"><span class="eyebrow"><i></i> SUA EVOLUÇÃO, COM DIREÇÃO</span><h1>O próximo passo<br>começa <em>por aqui.</em></h1><p>Conecte objetivos, treino e acompanhamento em uma só jornada.</p><div class="quote"><b>“</b><strong>Consistência transforma esforço em evolução.</strong><small>— VETRA • TREINO COM DIREÇÃO</small></div></div>
-      <div class="brand-foot"><span>© 2026 Vetra</span><span>Movimento com propósito</span></div>
-    </aside>
-    <section class="auth-panel">
-      <img class="mobile-logo" src="assets/vetra-logo.svg" alt="Vetra">
-      <div class="auth-wrap">
-        <div class="auth-heading"><span class="step" id="auth-eyebrow">COMECE SUA JORNADA</span><h2 id="auth-title">Criar sua conta</h2><p id="auth-subtitle">É rápido e gratuito. Vamos nessa?</p></div>
-        <div id="signup-role">
-          <label class="role-title">Como você vai usar a Vetra?</label>
-          <div class="roles" role="tablist" aria-label="Tipo de conta">
-            <button class="role active" data-role="treinador(a)" aria-selected="true" role="tab"><span class="role-icon">♧</span><span><b>Sou treinador(a)</b><small>Quero acompanhar atletas</small></span><i class="radio"></i></button>
-            <button class="role" data-role="atleta" aria-selected="false" role="tab"><span class="role-icon">↗</span><span><b>Sou atleta</b><small>Quero evoluir com orientação</small></span><i class="radio"></i></button>
-          </div>
-        </div>
-        <form id="auth-form" novalidate>
-          <div class="field signup-only"><label for="name">Nome completo</label><div class="input"><span>♙</span><input id="name" autocomplete="name" placeholder="Como podemos te chamar?"></div><small class="field-error"></small></div>
-          <div class="field"><label for="email">E-mail</label><div class="input"><span>✉</span><input id="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required></div><small class="field-error"></small></div>
-          <div class="field"><label for="password">Senha</label><div class="input"><span>♙</span><input id="password" type="password" autocomplete="current-password" placeholder="Sua senha" required><button type="button" id="toggle-password" aria-label="Mostrar senha">◉</button></div><small class="hint signup-only">Use pelo menos 8 caracteres.</small><small class="field-error"></small></div>
-          <label class="terms signup-only"><input id="terms" type="checkbox"><span class="check"></span><span>Li e aceito os <a href="#termos">Termos de Uso</a> e a <a href="#privacidade">Política de Privacidade</a>.</span></label>
-          <label class="invite-consent is-hidden" id="invite-consent-wrap"><input id="invite-consent" type="checkbox"><span>Ao aceitar, autorizo compartilhar meu perfil e as informações que eu preencher, inclusive observações de saúde, com <b id="invite-trainer-name">meu treinador</b> para orientar meus treinos.</span></label>
-          <button class="submit" id="auth-submit" type="submit">Criar minha conta <span>→</span></button>
-          <p class="feedback" id="auth-feedback" aria-live="polite"></p>
-        </form>
-        <div class="divider"><span>ou continue com</span></div>
-        <div class="social-actions" id="social-actions">
-          <button class="social-button" data-provider="google"><span class="google-mark">G</span><span>Google</span></button>
-          <button class="social-button" data-provider="apple"><svg viewBox="0 0 20 22" aria-hidden="true"><path d="M16.6 11.8c0-2 1.6-3 1.7-3.1a3.8 3.8 0 0 0-3-1.6c-1.3-.1-2.5.8-3.2.8-.7 0-1.7-.8-2.8-.8a4.2 4.2 0 0 0-3.5 2.1c-1.5 2.6-.4 6.4 1 8.5.7 1 1.5 2.2 2.6 2.2 1 0 1.4-.7 2.7-.7s1.7.7 2.8.7 1.8-1 2.5-2.2c.8-1.1 1.1-2.3 1.1-2.4-.1 0-2-.8-2-3.5ZM14.5 5.7c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.7-.9 2.6 1 0 1.9-.5 2.5-1.2Z"/></svg><span>Apple</span></button>
-        </div>
-        <p class="provider-note" id="provider-note">Login social em configuração.</p>
-        <div class="auth-switch" id="auth-switch">Já tem uma conta? <button type="button" data-screen="login">Entrar</button></div>
-      </div>
-      <footer><span>Feito para acompanhar sua evolução</span><span>♧ &nbsp; Seus dados estão protegidos</span></footer>
-    </section>
-  </main>
-</div>
-<div id="coach-view" class="is-hidden">
-  <div class="app-frame">
-    <aside class="sidebar" id="sidebar">
-      <div class="side-brand"><img src="assets/vetra-logo-branco.svg" alt="Vetra"></div>
-      <div class="workspace-label" id="workspace-label">ASSESSORIA</div>
-      <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
-        <button class="nav-item active" data-page="dashboard"><span>⌂</span>Visão geral</button>
-        <button class="nav-item" data-page="administration"><span>⚙</span>Gestão da assessoria</button>
-        <button class="nav-item" data-page="athletes"><span>♧</span>Meus atletas</button>
-        <button class="nav-item" data-page="workouts"><span>▤</span>Planos e treinos</button>
-        <button class="nav-item" data-page="calendar"><span>▦</span>Agenda</button>
-        <button class="nav-item" data-page="feedback"><span>◌</span>Feedbacks <i id="feedback-count"></i></button>
-        <button class="nav-item" data-page="reports"><span>↗</span>Relatórios</button>
-      </nav>
-      <div class="sidebar-bottom"><button class="nav-item" data-page="profile" id="profile-nav"><span>♙</span>Meu perfil</button><button class="nav-item" data-page="settings"><span>⚙</span>Configurações</button><div class="user-mini"><div class="avatar" id="side-avatar">V</div><div><b id="side-name">Vetra</b><small id="user-role-label">Treinador Vetra</small></div><button id="logout" aria-label="Sair">↪</button></div></div>
-    </aside>
-    <main class="workspace">
-      <header class="topbar"><button id="mobile-menu" aria-label="Abrir menu">☰</button><div class="crumb">Vetra <span>/</span> <b id="page-crumb">Visão geral</b></div><div class="top-actions"><span class="today-label" id="today-label"></span><button class="icon-button" aria-label="Notificações">♧</button><div class="avatar top-avatar" id="top-avatar">V</div></div></header>
-      <section id="page-content" class="page-content"></section>
-    </main>
-  </div>
-</div>
-<div id="modal-root"></div>
-<script src="app.js"></script>
-</body></html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#10283F">
+<title>Vetra — Treino com direção</title><meta name="description" content="A Vetra conecta a semana que você planeja ao que cada atleta conta depois de correr. Veja quem precisa de retorno e responda com o treino em mãos."><link rel="icon" href="/marketing/assets/vetra-simbolo-salvia.svg">
+<link rel="stylesheet" href="/marketing/assets/fonts.css"><link rel="stylesheet" href="/marketing/site.css"><link rel="stylesheet" href="/marketing/assets/identidade-vetra.css"><link rel="stylesheet" href="/marketing/redesign.css"><link rel="stylesheet" href="/marketing/assets/home-dark.css"><script defer src="/marketing/site.js"></script></head>
+<body class="turma design-salvia home-dark"><a class="skip" href="#main">Ir para o conteúdo</a><header class="page-header"><div class="wrap topbar"><a class="home-logo" href="/" aria-label="Vetra · início"><img class="brand-logo" src="/marketing/assets/vetra-logo-salvia-escuro.svg" width="172" height="43" alt="Vetra"></a><nav aria-label="Seções"><a href="#como-funciona">Como funciona</a><a href="#para-quem">Para quem</a><a href="#duvidas">Dúvidas</a></nav><a href="/app.html#login" class="button primary header-login">Login</a></div></header>
+<main id="main"><section class="wrap hero-salvia"><div class="hero-copy"><p class="eyebrow">Para assessorias de corrida</p><h1>Acompanhe sua turma, <em>treino a treino.</em></h1><p class="intro">Planeje a semana da sua assessoria, veja como cada atleta treinou e responda com o registro em mãos.</p><div class="actions"><button type="button" class="button primary" data-open-demo>Testar demonstração</button><a class="button secondary" href="#como-funciona">Como funciona</a></div></div><figure class="art-salvia"><img src="/marketing/assets/corredores-grupo.webp" width="1536" height="1024" fetchpriority="high" alt="Grupo de corredores vistos de costas durante um treino em pista ao ar livre"></figure></section><section id="como-funciona" class="section flow wrap">
+  <div class="section-top"><div><p class="eyebrow">Como funciona</p><h2>Da semana publicada ao feedback.</h2></div><p>Conheça o ciclo que a Vetra propõe para assessorias de corrida.</p></div>
+  <div class="flow-grid">
+    <article><span class="flow-icon" aria-hidden="true">▦</span><h3>Publique a semana</h3><p>Organize os treinos da turma e confira os destinatários antes de publicar.</p></article>
+    <article><span class="flow-icon" aria-hidden="true">≋</span><h3>Receba os registros</h3><p>O atleta informa no celular se concluiu, fez uma parte ou não realizou o treino.</p></article>
+    <article><span class="flow-icon" aria-hidden="true">◇</span><h3>Responda com contexto</h3><p>Compare prescrição e execução, veja quem aguarda retorno e envie seu feedback.</p></article>
+  </div></section><section class="roles-section" id="para-quem"><div class="wrap section roles"><div><p class="eyebrow">Para quem</p><h2>Uma semana.<br>Duas visões.</h2><p>O mesmo treino serve de referência para quem prescreve e para quem corre.</p></div><div class="roles-grid"><article><h3>Para a assessoria</h3><p>O treinador acompanha a turma e distingue os registros que precisam de revisão dos treinos que ainda aguardam resposta.</p></article><article><h3>Para o atleta</h3><p>O atleta abre o treino publicado, registra o que fez e encontra o retorno no mesmo lugar.</p></article></div></div></section><section class="section wrap" id="piloto"><div class="pilot"><div><p class="eyebrow">Piloto da Vetra</p><h2>Sua assessoria pode ajudar a desenhar a Vetra.</h2><p>O piloto foi pensado para assessorias de corrida com uma turma real e um treinador disposto a testar a publicação, o registro e o feedback ao longo de quatro semanas. Experimente o cenário fictício para ver como o fluxo funciona.</p></div><button type="button" class="button primary " data-open-demo>Experimentar o fluxo</button></div></section><section class="section faq wrap" id="duvidas"><div><p class="eyebrow">Perguntas frequentes</p><h2>Antes de começar.</h2></div><div class="faq-list">
+<details><summary>Preciso criar conta para testar?</summary><p>A demonstração desta página abre no navegador, com dados fictícios e sem cadastro. Você pode recomeçar sempre que quiser.</p></details>
+<details><summary>Preciso de um relógio esportivo?</summary><p>Na demonstração, o atleta registra a execução manualmente. Na plataforma, ele pode conectar sua conta Strava para sincronizar atividades.</p></details>
+<details><summary>Quem pode participar do piloto?</summary><p>O público inicial são assessorias de corrida de rua. O teste com turmas reais depende de seleção e configuração com a assessoria.</p></details>
+<details><summary>Já existe um plano para contratar?</summary><p>A Vetra está na fase de demonstração e validação. O preço e as condições de contratação serão definidos após os testes.</p></details>
+</div></section></main>
+<footer class="page-footer"><div class="wrap"><a class="home-logo" href="/" aria-label="Vetra · voltar ao início"><img class="brand-logo" src="/marketing/assets/vetra-logo-salvia.svg" width="172" height="43" alt="Vetra"></a><p>Vetra · Plataforma para assessorias de corrida em validação.</p></div></footer><dialog class="demo-dialog" id="demo" aria-labelledby="demo-title"><div class="demo-content"><button type="button" class="close" data-close-demo aria-label="Fechar demonstração">×</button><p class="eyebrow">Demonstração · Dados fictícios</p><h2 id="demo-title" tabindex="-1">Da publicação ao feedback</h2><div id="demo-stage"></div><p id="demo-announcement" class="visually-hidden" role="status"></p></div></dialog><script>if (location.hash.startsWith("#convite=") || ["dashboard","administration","athletes","workouts","calendar","feedback","reports","integrations","profile","settings","login","signup"].includes(location.hash.slice(1))) location.replace("/app.html" + location.search + location.hash);</script></body></html>

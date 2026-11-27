@@ -4,12 +4,12 @@ const b64u = (bytes) => { let s=""; for (const b of bytes) s+=String.fromCharCod
 export async function beginOAuth(request, env, provider) {
   const clientId = provider === "google" ? env.GOOGLE_CLIENT_ID : env.APPLE_CLIENT_ID;
   const ready = provider === "google" ? clientId && env.GOOGLE_CLIENT_SECRET : clientId && env.APPLE_TEAM_ID && env.APPLE_KEY_ID && env.APPLE_PRIVATE_KEY;
-  if (!ready) return Response.redirect(new URL("/?auth=provider-unavailable#" + (new URL(request.url).searchParams.get("screen") || "signup"), baseUrl(request, env)).toString(), 303);
+  if (!ready) return Response.redirect(new URL("/app.html?auth=provider-unavailable#" + (new URL(request.url).searchParams.get("screen") || "signup"), baseUrl(request, env)).toString(), 303);
   if (!await rateLimit(env, request, "oauth-" + provider, 20)) return reply({ error: "Muitas tentativas. Aguarde alguns minutos." }, 429);
   const query = new URL(request.url).searchParams, intent = query.get("intent") === "signup" ? "signup" : "login";
   const role = ["treinador(a)", "atleta"].includes(query.get("role")) ? query.get("role") : "treinador(a)";
   const accepted = query.get("termsAccepted") === "1";
-  if (intent === "signup" && !accepted) return Response.redirect(new URL("/?auth=terms-required#signup", baseUrl(request, env)).toString(), 303);
+  if (intent === "signup" && !accepted) return Response.redirect(new URL("/app.html?auth=terms-required#signup", baseUrl(request, env)).toString(), 303);
   const state = randomToken(), nonce = randomToken(), verifier = provider === "google" ? randomToken(48) : null;
   await env.DB.prepare("INSERT INTO oauth_states (state_hash,provider,nonce,code_verifier,role,intent,terms_accepted_at) VALUES (?,?,?,?,?,?,?)")
     .bind(await sha256(state), provider, nonce, verifier, role, intent, accepted ? new Date().toISOString() : null).run();
@@ -51,14 +51,12 @@ async function appleClientSecret(env) {
   return input + "." + b64u(signature);
 }
 export function successRedirect(request, env, cookie, user) {
-  const url = new URL("/", baseUrl(request, env));
+  const url = new URL("/app.html", baseUrl(request, env));
   url.searchParams.set("auth", "success");
   url.hash = user.role === "treinador(a)" ? "dashboard" : "dashboard";
   const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", cookie); headers.append("set-cookie", clearOAuthStateCookie(request)); return new Response(null, { status: 303, headers });
 }
 export function errorRedirect(request, env, code) {
-  const url = new URL("/", baseUrl(request, env)); url.searchParams.set("auth", code); url.hash = "login";
+  const url = new URL("/app.html", baseUrl(request, env)); url.searchParams.set("auth", code); url.hash = "login";
   const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", clearOAuthStateCookie(request)); return new Response(null, { status: 303, headers });
 }
-
-

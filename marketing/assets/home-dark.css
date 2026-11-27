@@ -1,0 +1,48 @@
+body.home-dark.design-salvia{--page:#10283F;--ink:#F6FAFF;--muted:#B5C8DA;--strong:#68B8E8;--highlight:#C5F044;--button-text:#10283F;--soft:#1B3851;--line:#FFFFFF25;--focus:#C5F044;--display:Geist,"Segoe UI",sans-serif;--body:"DM Sans","Segoe UI",sans-serif;position:relative;isolation:isolate;overflow-x:hidden;background:radial-gradient(ellipse at 81% 50%,#1C4462 0%,#132F49 35%,#10283F 73%);color:var(--ink)}
+body.home-dark:before,body.home-dark:after{content:"";position:absolute;z-index:-1;pointer-events:none;aspect-ratio:1;border-radius:50%;right:-21rem;top:4rem;width:min(59rem,78vw);border:3rem solid #FFFFFF09}
+body.home-dark:after{right:-17rem;top:9rem;width:min(49rem,66vw);border:1px solid #FFFFFF16;box-shadow:0 0 0 2.8rem #FFFFFF07,0 0 0 6.2rem #FFFFFF05}
+.home-dark .page-header{background:#10283FCE;border-color:#FFFFFF20;backdrop-filter:blur(12px)}
+.home-dark .page-header .topbar{justify-content:flex-start;gap:1.35rem}
+.home-dark .topbar nav{margin-left:auto}
+.home-dark .header-login{flex:none}
+.home-dark .topbar nav a{color:#D8E7F5}
+.home-dark .topbar nav a:hover{color:#FFFFFF}
+.home-dark .header-demo{color:#ECF5FD;border-color:#FFFFFF45;background:transparent}
+.home-dark .header-demo:hover{background:#FFFFFF0D;filter:none}
+.home-dark .header-login{background:#C5F044;color:#10283F}
+.home-dark .hero-salvia{position:relative;z-index:0;grid-template-columns:1fr .95fr;gap:clamp(1.7rem,5vw,4.7rem);padding-block:clamp(3.4rem,7vw,7rem)}
+.home-dark .hero-salvia .eyebrow{color:#B9D5EE}
+.home-dark .hero-salvia .eyebrow:before{content:"";display:inline-block;width:.52rem;height:.52rem;margin-right:.55rem;border-radius:50%;background:#C5F044;box-shadow:0 0 0 .28rem #C5F04420;vertical-align:1px}
+.home-dark .hero-salvia h1{max-width:11ch;color:#F7FAFF;font-size:clamp(3rem,5.5vw,5.15rem);line-height:1.03;letter-spacing:-.075em}
+.home-dark .hero-salvia h1 em{color:#C5F044}
+.home-dark .hero-salvia .intro{color:#C2D5E6}
+.home-dark .hero-salvia .button.primary{background:#C5F044;color:#10283F}
+.home-dark .hero-salvia .button.secondary{color:#E5F0FA;border-color:#FFFFFF45;background:transparent}
+.home-dark .hero-salvia .button.secondary:hover{background:#FFFFFF0C}
+.home-dark .art-salvia{aspect-ratio:1.15;border-radius:1.1rem 1.1rem 1.1rem 22%;background:#1B3851;border:1px solid #FFFFFF26;box-shadow:0 1.3rem 3.5rem #07172750}
+.home-dark .art-salvia img{object-position:center;filter:saturate(.92)}
+.home-dark .flow,.home-dark .faq{color:#F6FAFF}
+.home-dark .flow .eyebrow,.home-dark .roles .eyebrow,.home-dark .faq .eyebrow{color:#91CCE9}
+.home-dark .section-top p:last-child:not(.eyebrow),.home-dark .roles p:not(.eyebrow),.home-dark .flow-grid p,.home-dark .faq-list p{color:#B5C8DA}
+.home-dark .flow-grid h3,.home-dark .roles-grid h3{color:#F6FAFF}
+.home-dark .flow-grid article{border-color:#FFFFFF25;background:#FFFFFF08;border-radius:.9rem;padding:1.1rem}
+.home-dark .flow-icon{background:#C5F044;color:#10283F}
+.home-dark .roles-section{background:#122D46;border-block:1px solid #FFFFFF12}
+.home-dark .roles-grid article{background:#173650;border-color:#FFFFFF24}
+.home-dark .pilot{background:linear-gradient(145deg,#1A3852F2,#18334CEB);border:1px solid #FFFFFF22;box-shadow:0 1rem 3rem #07172735}
+.home-dark .pilot .eyebrow{color:#C5F044}
+.home-dark .pilot p:not(.eyebrow){color:#D7E4F0;opacity:1}
+.home-dark .pilot .button.primary{background:#C5F044;color:#10283F}
+.home-dark .faq-list details{border-color:#FFFFFF25}
+.home-dark .faq-list summary{color:#F4F8FC}
+.home-dark .page-footer{background:#0C2237;border-color:#FFFFFF20;color:#B5C8DA}
+.home-dark .page-footer p,.home-dark .page-footer .wrap>a:last-child{color:#B5C8DA}
+.home-dark .demo-dialog{--page:#10283F;--ink:#F6FAFF;--muted:#B5C8DA;--strong:#68B8E8;--highlight:#C5F044;--button-text:#10283F;--soft:#1B3851;--line:#FFFFFF30;color:#F6FAFF;background:#10283F;border-color:#FFFFFF30}
+.home-dark .demo-card{background:#173650;border-color:#FFFFFF25;color:#F6FAFF}
+.home-dark .demo-card p{color:#CFDCE8}
+.home-dark .demo-form label{color:#F0F6FB}
+.home-dark .demo-form :is(select,textarea){background:#0D2439;border-color:#7891A6;color:#F6FAFF}
+.home-dark .close{background:#173650;border-color:#FFFFFF30;color:#F6FAFF}
+@media(max-width:850px){.home-dark .hero-salvia{grid-template-columns:1fr;gap:1.4rem;padding-block:2.5rem 1.7rem}.home-dark .hero-salvia h1{max-width:12ch;font-size:clamp(2.8rem,8.6vw,4.2rem)}.home-dark .art-salvia{grid-row:2;aspect-ratio:1.65}.home-dark .hero-copy{grid-row:1}.home-dark:before{right:-26rem;top:2rem;width:48rem}.home-dark:after{right:-22rem;top:6rem;width:39rem}}
+@media(max-width:690px){.home-dark .hero-salvia{padding-block:2rem 1.35rem;gap:1.1rem}.home-dark .art-salvia{aspect-ratio:1.42;border-top-left-radius:25%}.home-dark .hero-salvia h1{font-size:clamp(2.55rem,9.3vw,3.6rem)}.home-dark .flow-grid{gap:.65rem}.home-dark .flow-grid article{border-width:1px;border-radius:.8rem;padding:.9rem}}
+@media(max-width:690px){.home-dark .page-header .topbar{justify-content:space-between;gap:.25rem .6rem}.home-dark .topbar nav{margin-left:0}}

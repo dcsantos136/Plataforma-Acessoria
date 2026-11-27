@@ -28,7 +28,7 @@ export async function onRequestPost({ request, env }) {
   await env.DB.prepare("UPDATE athlete_invitations SET status='revoked' WHERE trainer_id=? AND email_normalized=? AND status='pending'").bind(user.user_id,normalized).run();
   await env.DB.prepare("INSERT INTO athlete_invitations (id,trainer_id,athlete_id,email,email_normalized,token_hash,expires_at) VALUES (?,?,?,?,?,?,?)")
     .bind(id,user.user_id,athlete?.id || null,email,normalized,await sha256(token),expiresAt).run();
-  const inviteUrl = baseUrl(request,env) + "/#convite=" + encodeURIComponent(token);
+  const inviteUrl = baseUrl(request,env) + "/app.html#convite=" + encodeURIComponent(token);
   try {
     await sendAthleteInvitation(env,{to:email,trainerName:trainer?.name || "Seu treinador",inviteUrl,expiresAt,invitationId:id});
   } catch (err) {

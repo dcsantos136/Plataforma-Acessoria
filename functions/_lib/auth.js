@@ -64,7 +64,7 @@ export const baseUrl = (request, env) => {
   return url.origin;
 };
 export function redirectToApp(request, env, fragment = "login", message = "") {
-  const url = new URL(baseUrl(request, env));
+  const url = new URL("/app.html", baseUrl(request, env));
   url.searchParams.set("auth", message || "success");
   url.hash = fragment;
   return Response.redirect(url.toString(), 303);
@@ -114,5 +114,3 @@ export async function finishOAuth(env, request, provider, identity, state) {
   }
   return { user, setCookie: await createSession(env, user.id, request) };
 }
-
-

@@ -1,0 +1,57 @@
+body:is(.design-salvia,.design-movimento) .button{border-radius:.65rem}
+.hero-salvia,.hero-movimento{display:grid;align-items:center;gap:clamp(1.2rem,4.4vw,4.25rem);padding-block:clamp(2.85rem,6.7vw,6.4rem)}
+.hero-salvia{grid-template-columns:1fr 1.02fr}
+.hero-movimento{grid-template-columns:.86fr 1.1fr}
+:is(.hero-salvia,.hero-atlantico,.hero-movimento) h1{font-size:clamp(2.75rem,5.45vw,5.65rem);line-height:.99;letter-spacing:-.071em;margin-bottom:1.05rem}
+:is(.hero-salvia,.hero-atlantico,.hero-movimento) .eyebrow{color:var(--strong)}
+.hero-salvia h1,.hero-movimento h1{text-wrap:balance}
+.hero-salvia h1 em,.hero-movimento h1 em{font-style:normal;color:var(--highlight)}
+.hero-atlantico .hero-copy{max-width:none;display:contents}
+.hero-atlantico h1{grid-area:title;line-height:.97;letter-spacing:-.052em}
+.hero-atlantico h1 em{font-weight:500;color:var(--strong)}
+.hero-atlantico .eyebrow{grid-area:label;margin:0}
+.hero-atlantico .intro{grid-area:intro;align-self:end}
+.hero-atlantico .actions{grid-area:actions;margin-top:0}
+.art-salvia,.art-atlantico,.art-movimento{margin:0;background:var(--soft);overflow:hidden}
+.art-salvia{border-radius:35% 1.05rem 1.05rem 1.05rem;aspect-ratio:1.15}
+.art-movimento{border-radius:1rem;aspect-ratio:1.14}
+:is(.art-salvia,.art-atlantico,.art-movimento) img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-atlantico{background:linear-gradient(180deg,var(--page),var(--soft));padding-block:clamp(2.1rem,4.4vw,4.25rem) 0}
+.editorial-head{display:grid;grid-template-columns:1.32fr 1fr;gap:.32rem 2rem;grid-template-areas:"label label" "title intro" "title actions";align-items:start;margin-bottom:1.15rem}
+.art-atlantico{width:min(1180px,100% - 3.75rem);margin-inline:auto;border-radius:1.1rem;aspect-ratio:2.9}
+.art-atlantico img{object-position:center 20%}
+.hero-steps{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.4rem;max-width:29rem}
+.hero-steps li{display:flex;gap:.65rem;align-items:center;font-weight:700;background:var(--soft);border:1px solid var(--line);color:var(--ink);border-radius:.48rem;padding:.33rem .52rem}
+.hero-steps li span{display:grid;place-items:center;min-width:1.65rem;height:1.65rem;background:#fff;color:var(--strong);border-radius:50%;font-size:.83rem}
+.design-movimento .flow-grid article{border:1px solid var(--line);border-radius:.82rem;padding:1.14rem;background:#ffffffa0}
+.design-salvia .flow-grid article{border:1px solid var(--line);border-radius:.82rem;padding:1.14rem;background:#ffffffa0}
+.design-movimento .flow .eyebrow,.design-movimento .roles .eyebrow,.design-salvia .flow .eyebrow,.design-salvia .roles .eyebrow{color:var(--strong)}
+.design-salvia .pilot .primary,.design-movimento .pilot .primary,.design-atlantico .pilot .primary{background:var(--soft);color:var(--ink)}
+.design-salvia .pilot,.design-movimento .pilot,.design-atlantico .pilot{outline:1px solid #ffffff57;outline-offset:-6px}
+.redesign-studio .studio-main>h1{font-size:clamp(3rem,7.6vw,6.25rem)}
+.design-swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.28rem;list-style:none;padding:0;margin:.2rem 0 .7rem;width:100%}
+.design-swatches li{display:flex;flex-direction:column;gap:.15rem;align-items:center;min-width:0}
+.design-swatches li>span{display:block;width:100%;height:1.8rem;border-radius:.36rem;border:1px solid #28372c25}
+.design-swatches code{font-size:.68rem;color:var(--muted)}
+.font-note{font-size:.84rem!important}
+.design-recommendation{margin-top:1.1rem;background:#e8efe7;border-radius:.8rem;padding:1rem 1.18rem}
+.design-recommendation h2{font-size:1.35rem;margin-bottom:.3rem}
+.brand-display{padding:1rem}
+.comparison-info .design-swatches code{font-size:.78rem}
+.font-note{color:var(--muted);font-weight:700}
+.identity .studio-main>h1{font-size:clamp(2.8rem,7vw,5.7rem)}
+@media(max-width:900px){.art-atlantico{width:calc(100% - 2.4rem)}.editorial-head{gap:.35rem 1.3rem}}
+@media(max-width:690px){
+ .hero-salvia,.hero-movimento{grid-template-columns:1fr;padding-block:2.15rem 1.35rem;gap:1.1rem}
+ :is(.hero-salvia,.hero-atlantico,.hero-movimento) h1{font-size:clamp(2.55rem,9.7vw,4rem)}
+ .hero-movimento .art-movimento{grid-row:2}
+ .art-salvia{aspect-ratio:1.44;border-top-left-radius:25%}
+ .art-movimento{aspect-ratio:1.5}
+ .art-atlantico{width:calc(100% - 1.6rem);aspect-ratio:1.48}
+ .art-atlantico img{object-position:center}
+ .editorial-head{grid-template-columns:1fr;grid-template-areas:"label" "title" "intro" "actions";gap:.65rem}
+ .editorial-head h1{margin-bottom:0}
+ .hero-atlantico .actions{margin-top:.3rem}
+ .hero-steps{gap:.32rem}
+}
+@media(max-width:360px){.art-atlantico{width:calc(100% - 1.2rem)}}

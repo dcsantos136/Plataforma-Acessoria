@@ -1,0 +1,133 @@
+/* Tokens das três direções visuais Vetra. */
+:root {
+  --salvia-page: #F1F6EF;
+  --salvia-surface: #FFFFFF;
+  --salvia-soft: #DAE8D9;
+  --salvia-brand: #28594B;
+  --salvia-ink: #203C33;
+  --salvia-muted: #465F54;
+  --salvia-line: #CBD9CC;
+  --salvia-accent: #2F70B7;
+  --salvia-accent-soft: #E0EBF7;
+
+  --atlantico-page: #F1F6FB;
+  --atlantico-surface: #FFFFFF;
+  --atlantico-soft: #DCE9F3;
+  --atlantico-brand: #265D92;
+  --atlantico-ink: #1F354C;
+  --atlantico-muted: #4D6073;
+  --atlantico-line: #CBD9E6;
+  --atlantico-accent: #278663;
+  --atlantico-accent-soft: #DFF1E8;
+
+  --movimento-page: #F1F8F4;
+  --movimento-surface: #FFFFFF;
+  --movimento-soft: #DDEEE4;
+  --movimento-brand: #16734E;
+  --movimento-ink: #153B2F;
+  --movimento-muted: #476357;
+  --movimento-line: #C9DED3;
+  --movimento-accent: #3176C5;
+  --movimento-accent-soft: #DBE9F6;
+}
+
+body.design-salvia {
+  --page: var(--salvia-page);
+  --ink: var(--salvia-ink);
+  --muted: var(--salvia-muted);
+  --strong: var(--salvia-brand);
+  --accent: var(--salvia-accent);
+  --highlight: var(--salvia-brand);
+  --button-text: #FFFFFF;
+  --soft: var(--salvia-soft);
+  --line: var(--salvia-line);
+  --focus: #226853;
+  --display: Geist, "Segoe UI", sans-serif;
+  --body: "DM Sans", "Segoe UI", sans-serif;
+}
+
+body.design-atlantico {
+  --page: var(--atlantico-page);
+  --ink: var(--atlantico-ink);
+  --muted: var(--atlantico-muted);
+  --strong: var(--atlantico-brand);
+  --accent: var(--atlantico-accent);
+  --highlight: var(--atlantico-brand);
+  --button-text: #FFFFFF;
+  --soft: var(--atlantico-soft);
+  --line: var(--atlantico-line);
+  --focus: #1F5D8E;
+  --display: Fraunces, Georgia, serif;
+  --body: "DM Sans", "Segoe UI", sans-serif;
+}
+
+body.design-movimento {
+  --page: var(--movimento-page);
+  --ink: var(--movimento-ink);
+  --muted: var(--movimento-muted);
+  --strong: var(--movimento-ink);
+  --accent: var(--movimento-accent);
+  --highlight: var(--movimento-brand);
+  --button-text: #FFFFFF;
+  --soft: var(--movimento-soft);
+  --line: var(--movimento-line);
+  --focus: #206B4A;
+  --display: Geist, "Segoe UI", sans-serif;
+  --body: "DM Sans", "Segoe UI", sans-serif;
+}
+
+.studio {
+  --page: #F7F9F6;
+  --ink: #203C33;
+  --muted: #465F54;
+  --strong: #28594B;
+  --highlight: #28594B;
+  --button-text: #FFFFFF;
+  --soft: #E8EFE7;
+  --line: #D7E0D6;
+  --focus: #226853;
+}
+
+.brand-display { padding: 1rem; }
+.brand-display--salvia { background: var(--salvia-soft); color: var(--salvia-ink); }
+.brand-display--atlantico { background: var(--atlantico-soft); color: var(--atlantico-ink); }
+.brand-display--movimento { background: var(--movimento-soft); color: var(--movimento-ink); }
+.brand-logo { display: block; width: min(172px, 46vw); height: auto; }
+.identity-logo { display: block; width: min(17rem, 78%); height: auto; }
+.identity-visual { width: 100%; aspect-ratio: 16 / 8; object-fit: cover; border-radius: .65rem; margin: .75rem 0 1rem; }
+.identity-option h2 { margin-bottom: .35rem; }
+.identity-option.design-salvia { --page: var(--salvia-page); --ink: var(--salvia-ink); --muted: var(--salvia-muted); --strong: var(--salvia-brand); --accent: var(--salvia-accent); --highlight: var(--salvia-brand); --button-text: #FFFFFF; --soft: var(--salvia-soft); --line: var(--salvia-line); --display: Geist, sans-serif; }
+.identity-option.design-atlantico { --page: var(--atlantico-page); --ink: var(--atlantico-ink); --muted: var(--atlantico-muted); --strong: var(--atlantico-brand); --accent: var(--atlantico-accent); --highlight: var(--atlantico-brand); --button-text: #FFFFFF; --soft: var(--atlantico-soft); --line: var(--atlantico-line); --display: Fraunces, Georgia, serif; }
+.identity-option.design-movimento { --page: var(--movimento-page); --ink: var(--movimento-ink); --muted: var(--movimento-muted); --strong: var(--movimento-ink); --accent: var(--movimento-accent); --highlight: var(--movimento-brand); --button-text: #FFFFFF; --soft: var(--movimento-soft); --line: var(--movimento-line); --display: Geist, sans-serif; }
+.identity-option p { color: var(--muted); }
+.identity-option h3 { font: 700 1rem/1.35 "DM Sans", sans-serif; margin: 1rem 0 .45rem; letter-spacing: 0; }
+.identity-option.design-atlantico .identity-sample strong { font-family: Fraunces, Georgia, serif; }
+.identity-swatches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem; list-style: none; padding: 0; margin: .45rem 0 0; }
+.identity-swatches li { display: grid; grid-template-columns: 2.1rem minmax(0, 1fr); align-items: center; gap: .45rem; font-size: .88rem; }
+.identity-swatches li > span:first-child { width: 2.1rem; height: 2.1rem; border: 1px solid #64748b55; border-radius: .4rem; }
+.identity-swatches code { display: block; font-size: .78rem; color: var(--muted); }
+.identity-sample { display: grid; gap: .45rem; margin-top: .9rem; padding: .85rem; border: 1px solid var(--line); border-radius: .7rem; background: var(--page); }
+.identity-sample p { margin: 0; font-size: .88rem; }
+.identity-sample strong { font-family: var(--display); font-size: 1.25rem; color: var(--ink); }
+.identity-sample .button { min-height: 46px; margin-top: .25rem; }
+.identity-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+.identity-notes article { background: #FFFFFF; border: 1px solid var(--line); border-radius: .85rem; padding: 1.05rem; }
+.identity-notes h3 { font-size: 1.15rem; margin-bottom: .4rem; }
+.identity-notes p { color: var(--muted); }
+.identity-badge { display: inline-flex; border-radius: 999px; padding: .25rem .55rem; font-size: .8rem; font-weight: 750; background: var(--soft); color: var(--ink); margin: .3rem 0 .6rem; }
+.identity-option.design-salvia .button.primary, .comparison-card.design-salvia .button.primary { background: var(--salvia-brand); color: #FFFFFF; }
+.identity-option.design-atlantico .button.primary, .comparison-card.design-atlantico .button.primary { background: var(--atlantico-brand); color: #FFFFFF; }
+.identity-option.design-movimento .button.primary, .comparison-card.design-movimento .button.primary { background: var(--movimento-brand); color: #FFFFFF; }
+.identity-comparison { width: 100%; border-collapse: collapse; margin-top: 1rem; background: #FFFFFF; border: 1px solid var(--line); border-radius: .75rem; overflow: hidden; }
+.identity-comparison th, .identity-comparison td { text-align: left; vertical-align: top; padding: .75rem; border-bottom: 1px solid var(--line); }
+.identity-comparison th { font-size: .86rem; color: var(--strong); }
+.identity-comparison td { font-size: .92rem; }
+.identity-comparison tr:last-child td { border-bottom: 0; }
+.identity-disclaimer { margin-top: 1rem; color: var(--muted); font-size: .9rem; }
+
+@media (max-width: 690px) {
+  .identity-notes { grid-template-columns: 1fr; }
+  .identity-comparison { display: block; overflow-x: auto; }
+  .identity-comparison th, .identity-comparison td { min-width: 8.5rem; }
+}
+
