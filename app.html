@@ -51,7 +51,7 @@
 <div id="coach-view" class="is-hidden">
   <div class="app-frame">
     <aside class="sidebar" id="sidebar">
-      <div class="side-brand"><img src="assets/vetra-logo-branco.svg" alt="Vetra"></div>
+      <div class="side-brand"><img src="assets/vetra-logo-branco.svg" alt="Vetra"><button type="button" id="close-sidebar" aria-label="Fechar menu">×</button></div>
       <div class="workspace-label" id="workspace-label">ASSESSORIA</div>
       <nav class="main-nav" id="main-nav" aria-label="Navegação principal">
         <button class="nav-item active" data-page="dashboard"><span>⌂</span>Visão geral</button>
@@ -63,9 +63,9 @@
         <button class="nav-item" data-page="reports"><span>↗</span>Relatórios</button>
       </nav>
       <div class="sidebar-bottom"><button class="nav-item" data-page="profile" id="profile-nav"><span>♙</span>Meu perfil</button><button class="nav-item" data-page="settings"><span>⚙</span>Configurações</button><div class="user-mini"><div class="avatar" id="side-avatar">V</div><div><b id="side-name">Vetra</b><small id="user-role-label">Treinador Vetra</small></div><button id="logout" aria-label="Sair">↪</button></div></div>
-    </aside>
+    </aside><button type="button" class="sidebar-backdrop" id="sidebar-backdrop" aria-label="Fechar menu lateral" aria-hidden="true" tabindex="-1"></button>
     <main class="workspace">
-      <header class="topbar"><button id="mobile-menu" aria-label="Abrir menu">☰</button><div class="crumb">Vetra <span>/</span> <b id="page-crumb">Visão geral</b></div><div class="top-actions"><span class="today-label" id="today-label"></span><button class="icon-button" aria-label="Notificações">♧</button><div class="avatar top-avatar" id="top-avatar">V</div></div></header>
+      <header class="topbar"><button id="mobile-menu" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false">☰</button><div class="crumb">Vetra <span>/</span> <b id="page-crumb">Visão geral</b></div><div class="top-actions"><span class="today-label" id="today-label"></span><button class="icon-button" aria-label="Notificações">♧</button><div class="avatar top-avatar" id="top-avatar">V</div></div></header>
       <section id="page-content" class="page-content"></section>
     </main>
   </div>
