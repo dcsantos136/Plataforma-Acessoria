@@ -1,4 +1,4 @@
-import { reply, randomToken, sha256, rateLimit, baseUrl, setOAuthStateCookie, clearOAuthStateCookie } from "./auth.js";
+import { reply, randomToken, sha256, rateLimit, baseUrl, setOAuthStateCookie, clearOAuthStateCookie, clearPendingOAuthCookie } from "./auth.js";
 const enc = new TextEncoder();
 const b64u = (bytes) => { let s=""; for (const b of bytes) s+=String.fromCharCode(b); return btoa(s).replaceAll("+","-").replaceAll("/","_").replace(/=+$/g,""); };
 export async function beginOAuth(request, env, provider) {
@@ -54,9 +54,14 @@ export function successRedirect(request, env, cookie, user) {
   const url = new URL("/app.html", baseUrl(request, env));
   url.searchParams.set("auth", "success");
   url.hash = user.role === "treinador(a)" ? "dashboard" : "dashboard";
-  const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", cookie); headers.append("set-cookie", clearOAuthStateCookie(request)); return new Response(null, { status: 303, headers });
+  const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", cookie); headers.append("set-cookie", clearOAuthStateCookie(request)); headers.append("set-cookie", clearPendingOAuthCookie(request)); return new Response(null, { status: 303, headers });
+}
+export function roleRequiredRedirect(request, env, cookie) {
+  const url = new URL("/app.html", baseUrl(request, env)); url.searchParams.set("auth", "role-required"); url.hash = "signup";
+  const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", cookie); headers.append("set-cookie", clearOAuthStateCookie(request));
+  return new Response(null, { status: 303, headers });
 }
 export function errorRedirect(request, env, code) {
   const url = new URL("/app.html", baseUrl(request, env)); url.searchParams.set("auth", code); url.hash = "login";
-  const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", clearOAuthStateCookie(request)); return new Response(null, { status: 303, headers });
+  const headers = new Headers({ location: url.toString(), "cache-control": "no-store" }); headers.append("set-cookie", clearOAuthStateCookie(request)); headers.append("set-cookie", clearPendingOAuthCookie(request)); return new Response(null, { status: 303, headers });
 }

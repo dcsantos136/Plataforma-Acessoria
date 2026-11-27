@@ -62,7 +62,7 @@ As observações sobre saúde são informações sensíveis. Colete somente o ne
 
 Cadastro e login por e-mail usam uma sessão opaca em cookie HttpOnly, Secure em HTTPS, SameSite=Lax, sete dias de duração e hash do token guardado no D1. A senha nunca é guardada em texto puro; é derivada com PBKDF2-HMAC-SHA256, salt exclusivo e 600.000 iterações. Há limite por endereço de rede para tentativas de autenticação.
 
-Login Google e Apple usam Authorization Code, state de uso único, cookie temporário vinculado ao navegador, nonce, validação de emissor, público, expiração, e-mail verificado e assinatura do ID Token. Google também usa PKCE S256. Tokens de acesso do provedor não são armazenados.
+Login Google e Apple usam Authorization Code, state de uso único, cookie temporário vinculado ao navegador, nonce, validação de emissor, público, expiração, e-mail verificado e assinatura do ID Token. Google também usa PKCE S256. Tokens de acesso do provedor não são armazenados. Depois de autenticar, uma conta já cadastrada entra diretamente; uma pessoa sem cadastro ativo escolhe se é atleta ou treinador(a), aceita os termos e então conclui o primeiro cadastro. A identidade verificada fica em um token temporário HttpOnly de uso único, válido por dez minutos.
 
 ### Ativar Google e Apple
 
@@ -87,7 +87,7 @@ A pasta functions/ implementa as rotas de API. O arquivo wrangler.jsonc e as con
 
 Para preparar outro ambiente Cloudflare, aplique as migrações na seguinte ordem:
 
-1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql, migrations/0005_wearable_integrations.sql, migrations/0006_athlete_invites_and_profile.sql e migrations/0007_coach_feedback_replies.sql.
+1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql, migrations/0005_wearable_integrations.sql, migrations/0006_athlete_invites_and_profile.sql, migrations/0007_coach_feedback_replies.sql e migrations/0008_pending_oauth_registrations.sql.
 2. Cadastre o binding D1 DB no Pages em Settings > Bindings.
 3. Cadastre as variáveis e Secrets de OAuth, Strava e e-mail necessários no Pages e publique novamente.
 

@@ -12,6 +12,9 @@ export const setSessionCookie = (request, token) => (isHttps(request) ? "__Host-
 export const clearSessionCookie = (request) => (isHttps(request) ? "__Host-vetra_session" : "vetra_session") + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + (isHttps(request) ? "; Secure" : "");
 export const sessionCookieName = (request) => isHttps(request) ? "__Host-vetra_session" : "vetra_session";
 export const oauthCookieName = (request) => isHttps(request) ? "__Host-vetra_oauth" : "vetra_oauth";
+export const pendingOAuthCookieName = (request) => isHttps(request) ? "__Host-vetra_pending_oauth" : "vetra_pending_oauth";
+export const setPendingOAuthCookie = (request, token) => pendingOAuthCookieName(request) + "=" + encodeURIComponent(token) + "; Path=/; HttpOnly; SameSite=Lax; Max-Age=600" + (isHttps(request) ? "; Secure" : "");
+export const clearPendingOAuthCookie = (request) => pendingOAuthCookieName(request) + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + (isHttps(request) ? "; Secure" : "");
 export const setOAuthStateCookie = (request, state) => oauthCookieName(request) + "=" + encodeURIComponent(state) + "; Path=/; HttpOnly; SameSite=" + (isHttps(request) ? "None; Secure" : "Lax") + "; Max-Age=600";
 export const clearOAuthStateCookie = (request) => oauthCookieName(request) + "=; Path=/; HttpOnly; SameSite=" + (isHttps(request) ? "None; Secure" : "Lax") + "; Max-Age=0";
 export const oauthStateMatches = (request, state) => Boolean(state && cookieToken(request, oauthCookieName(request)) === state);
@@ -101,7 +104,12 @@ export async function finishOAuth(env, request, provider, identity, state) {
   let user = account ? await env.DB.prepare("SELECT id,name,email,role FROM users WHERE id=?").bind(account.user_id).first() : null;
   if (!user) {
     user = await env.DB.prepare("SELECT id,name,email,role FROM users WHERE email_normalized=?").bind(email).first();
-    if (!user && state.intent !== "signup") throw new Error("Conta não encontrada. Crie uma conta primeiro.");
+    if (!user && state.intent !== "signup") {
+      const token = randomToken(), name = identity.name || identity.email.split("@")[0];
+      await env.DB.prepare("INSERT INTO pending_oauth_registrations (token_hash,provider,provider_subject,email,email_normalized,name,expires_at) VALUES (?,?,?,?,?,?,?)")
+        .bind(await sha256(token), provider, identity.sub, identity.email, email, name, new Date(Date.now() + 10 * 60 * 1000).toISOString()).run();
+      return { needsRole: true, pendingCookie: setPendingOAuthCookie(request, token) };
+    }
     if (!user) {
       if (!state.terms_accepted_at) throw new Error("Aceite os termos antes de criar sua conta.");
       const id = crypto.randomUUID(), salt = crypto.getRandomValues(new Uint8Array(16));

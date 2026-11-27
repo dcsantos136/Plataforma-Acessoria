@@ -1,6 +1,6 @@
 import { exchangeCode } from "../../../_lib/oauth.js";
 import { consumeOAuthState, verifyOidcToken, finishOAuth, oauthStateMatches } from "../../../_lib/auth.js";
-import { successRedirect, errorRedirect } from "../../../_lib/oauth.js";
+import { successRedirect, roleRequiredRedirect, errorRedirect } from "../../../_lib/oauth.js";
 export async function onRequestPost({ request, env }) {
   try {
     const form = await request.formData(), stateValue = String(form.get("state") || ""); if (!oauthStateMatches(request, stateValue)) return errorRedirect(request, env, "invalid-state");
@@ -17,6 +17,7 @@ export async function onRequestPost({ request, env }) {
       } catch {}
     }
     const result = await finishOAuth(env, request, "apple", identity, state);
+    if (result.needsRole) return roleRequiredRedirect(request, env, result.pendingCookie);
     return successRedirect(request, env, result.setCookie, result.user);
   } catch {
     return errorRedirect(request, env, "apple-error");
