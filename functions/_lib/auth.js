@@ -43,9 +43,11 @@ export async function sameOrigin(request, env) {
   try { expected = new URL(env.APP_BASE_URL || request.url).origin; } catch { return false; }
   return origin === expected;
 }
-export async function passwordHash(password, salt) {
+export const PASSWORD_HASH_ITERATIONS = 100000;
+export const PASSWORD_HASH_ALGORITHM = `PBKDF2-SHA256-${PASSWORD_HASH_ITERATIONS}`;
+export async function passwordHash(password, salt, iterations = PASSWORD_HASH_ITERATIONS) {
   const key = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]);
-  return b64u(new Uint8Array(await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt, iterations: 600000 }, key, 256)));
+  return b64u(new Uint8Array(await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt, iterations }, key, 256)));
 }
 export function safeEqual(a, b) {
   const x = enc.encode(String(a)), y = enc.encode(String(b)); let diff = x.length ^ y.length;

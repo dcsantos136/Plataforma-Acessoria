@@ -1,4 +1,4 @@
-import { reply, parseJson, rateLimit, passwordHash, safeEqual, createSession, sameOrigin } from "../../_lib/auth.js";
+import { reply, parseJson, rateLimit, passwordHash, PASSWORD_HASH_ITERATIONS, safeEqual, createSession, sameOrigin } from "../../_lib/auth.js";
 export async function onRequestPost({ request, env }) {
   if (!await sameOrigin(request, env)) return reply({ error: "Origem não autorizada." }, 403);
   if (!await rateLimit(env, request, "login", 10)) return reply({ error: "Muitas tentativas. Aguarde alguns minutos." }, 429, { "retry-after": "900" });
@@ -9,7 +9,10 @@ export async function onRequestPost({ request, env }) {
   try {
     if (user && user.password_algorithm !== "OAUTH-ONLY") {
       const salt = Uint8Array.from(atob(user.password_salt), c => c.charCodeAt(0));
-      valid = safeEqual(await passwordHash(password, salt), user.password_hash);
+      const storedIterations = Number(/^PBKDF2-SHA256-(\d+)$/.exec(user.password_algorithm || "")?.[1]);
+      if (Number.isInteger(storedIterations) && storedIterations > 0 && storedIterations <= PASSWORD_HASH_ITERATIONS) {
+        valid = safeEqual(await passwordHash(password, salt, storedIterations), user.password_hash);
+      }
     } else {
       await passwordHash(password, crypto.getRandomValues(new Uint8Array(16)));
     }

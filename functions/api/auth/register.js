@@ -1,4 +1,4 @@
-import { reply, parseJson, rateLimit, passwordHash, createSession, sameOrigin, sha256 } from "../../_lib/auth.js";
+import { reply, parseJson, rateLimit, passwordHash, PASSWORD_HASH_ALGORITHM, createSession, sameOrigin, sha256 } from "../../_lib/auth.js";
 export async function onRequestPost({ request, env }) {
   if (!await sameOrigin(request, env)) return reply({ error: "Origem não autorizada." }, 403);
   if (!await rateLimit(env, request, "register", 8)) return reply({ error: "Muitas tentativas. Aguarde alguns minutos." }, 429, { "retry-after": "900" });
@@ -22,7 +22,7 @@ export async function onRequestPost({ request, env }) {
     const id = crypto.randomUUID(), hash = await passwordHash(password, salt);
     stage = "insert-user";
     await env.DB.prepare("INSERT INTO users (id,name,email,email_normalized,role,password_salt,password_hash,password_algorithm,terms_accepted_at) VALUES (?,?,?,?,?,?,?,?,?)")
-      .bind(id, name, email, normalized, role, btoa(String.fromCharCode(...salt)), hash, "PBKDF2-SHA256-600000", new Date().toISOString()).run();
+      .bind(id, name, email, normalized, role, btoa(String.fromCharCode(...salt)), hash, PASSWORD_HASH_ALGORITHM, new Date().toISOString()).run();
     stage = "create-session";
     const cookie = await createSession(env, id, request);
     return reply({ user: { id, name, email, role } }, 201, { "set-cookie": cookie });
