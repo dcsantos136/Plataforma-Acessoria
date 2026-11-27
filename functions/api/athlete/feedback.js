@@ -3,7 +3,7 @@ import { reply, requireUser, sameOrigin, parseJson, rateLimit } from "../../_lib
 export async function onRequestGet({ request, env }) {
   const { user, error } = await requireUser(request, env, "atleta");
   if (error) return error;
-  const result = await env.DB.prepare("SELECT w.id AS workout_id,w.workout_date,w.title,w.modality,f.id AS feedback_id,f.body,f.effort,f.created_at FROM workouts w LEFT JOIN workout_feedback f ON f.workout_id=w.id AND f.athlete_id=w.athlete_id WHERE w.athlete_id=? AND w.status='completed' ORDER BY w.workout_date DESC,w.created_at DESC LIMIT 100").bind(user.user_id).all();
+  const result = await env.DB.prepare("SELECT w.id AS workout_id,w.workout_date,w.title,w.modality,f.id AS feedback_id,f.body,f.effort,f.created_at,r.body AS coach_reply,r.updated_at AS coach_reply_at FROM workouts w LEFT JOIN workout_feedback f ON f.workout_id=w.id AND f.athlete_id=w.athlete_id LEFT JOIN workout_coach_replies r ON r.feedback_id=f.id AND r.trainer_id=w.trainer_id WHERE w.athlete_id=? AND w.status='completed' ORDER BY w.workout_date DESC,w.created_at DESC LIMIT 100").bind(user.user_id).all();
   return reply({ feedback: result.results || [] });
 }
 

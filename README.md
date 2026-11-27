@@ -11,6 +11,8 @@ As migrações migrations/0002_auth_and_trainer.sql e migrations/0003_role_profi
 ## Recursos do treinador
 
 - Visão geral com atletas, próximos treinos, sessões concluídas e distância registrada.
+- Painel do treinador priorizado por próximas ações: feedbacks para responder, treinos liberados sem registro e rascunhos da semana para revisar.
+- Respostas do treinador ficam registradas junto ao feedback e aparecem para o atleta na área Feedbacks.
 - Convite de atleta por e-mail, com link de uso único válido por sete dias.
 - Perfil compartilhado do atleta com data de nascimento, peso, altura e observações de saúde, disponível ao treinador somente após autorização do atleta.
 - Criação de ciclos e prescrição de sessões.
@@ -85,7 +87,7 @@ A pasta functions/ implementa as rotas de API. O arquivo wrangler.jsonc e as con
 
 Para preparar outro ambiente Cloudflare, aplique as migrações na seguinte ordem:
 
-1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql, migrations/0005_wearable_integrations.sql e migrations/0006_athlete_invites_and_profile.sql.
+1. Aplique api/migrations/0001_create_users.sql, migrations/0002_auth_and_trainer.sql, migrations/0003_role_profiles.sql, migrations/0004_assessoria_management.sql, migrations/0005_wearable_integrations.sql, migrations/0006_athlete_invites_and_profile.sql e migrations/0007_coach_feedback_replies.sql.
 2. Cadastre o binding D1 DB no Pages em Settings > Bindings.
 3. Cadastre as variáveis e Secrets de OAuth, Strava e e-mail necessários no Pages e publique novamente.
 
