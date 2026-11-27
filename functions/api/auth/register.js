@@ -17,13 +17,19 @@ export async function onRequestPost({ request, env }) {
     if (!invite) return reply({error:"Este convite não é válido ou expirou."},404);
   }
   const salt = crypto.getRandomValues(new Uint8Array(16));
+  let stage = "password-hash";
   try {
     const id = crypto.randomUUID(), hash = await passwordHash(password, salt);
+    stage = "insert-user";
     await env.DB.prepare("INSERT INTO users (id,name,email,email_normalized,role,password_salt,password_hash,password_algorithm,terms_accepted_at) VALUES (?,?,?,?,?,?,?,?,?)")
       .bind(id, name, email, normalized, role, btoa(String.fromCharCode(...salt)), hash, "PBKDF2-SHA256-600000", new Date().toISOString()).run();
+    stage = "create-session";
     const cookie = await createSession(env, id, request);
     return reply({ user: { id, name, email, role } }, 201, { "set-cookie": cookie });
   } catch (error) {
+    const detail = String(error?.message || "").slice(0, 240);
+    const safeDetail = [name, email, normalized, password, invitationToken].filter(Boolean).reduce((value, secret) => value.split(secret).join("[redacted]"), detail);
+    console.error("auth.register.failed", { stage, errorName: String(error?.name || "Error"), errorCode: String(error?.code || ""), detail: safeDetail });
     if (String(error?.message || "").toLowerCase().includes("unique")) return reply({ error: "Não foi possível criar a conta com esses dados. Verifique se o e-mail já está cadastrado." }, 409);
     return reply({ error: "Não foi possível concluir o cadastro. Tente novamente." }, 500);
   }
