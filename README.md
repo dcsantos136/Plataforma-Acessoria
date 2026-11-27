@@ -54,7 +54,7 @@ O convite é enviado pelo serviço transacional [Resend](https://resend.com/docs
 - Variável `EMAIL_FROM` com o remetente autorizado, por exemplo `Vetra <convites@seudominio.com.br>`.
 - Variável `APP_BASE_URL` com a URL pública da aplicação.
 
-Depois de salvar as configurações, publique novamente. O convite vence em sete dias e o token bruto aparece somente no link enviado; o banco guarda o hash. O atleta precisa entrar ou criar a conta com o e-mail convidado e aceitar o compartilhamento antes da criação do vínculo. O treinador vê os dados apenas enquanto o consentimento estiver ativo. Se o atleta retirar a autorização, as observações de saúde são apagadas e os dados do perfil deixam de ser exibidos ao treinador.
+Depois de salvar as configurações, publique novamente para ativar o envio automático. Se o serviço de e-mail não estiver configurado ou falhar, o convite continua disponível como link seguro para o treinador copiar e compartilhar manualmente. O convite vence em sete dias e o token bruto aparece somente nesse link; o banco guarda o hash. O atleta precisa entrar ou criar a conta com o e-mail convidado e aceitar o compartilhamento antes da criação do vínculo. O treinador vê os dados apenas enquanto o consentimento estiver ativo. Se o atleta retirar a autorização, as observações de saúde são apagadas e os dados do perfil deixam de ser exibidos ao treinador.
 
 As observações sobre saúde são informações sensíveis. Colete somente o necessário para adaptar o treino e mantenha uma política de privacidade compatível com o uso desses dados.
 

@@ -14,7 +14,6 @@ export async function onRequestPost({ request, env }) {
   if (!await sameOrigin(request, env)) return reply({ error: "Origem não autorizada." }, 403);
   const { user, error } = await requireUser(request, env, "treinador(a)"); if (error) return error;
   if (!await rateLimit(env,request,"athlete-invite",10)) return reply({error:"Muitos convites em pouco tempo. Tente novamente mais tarde."},429,{"retry-after":"900"});
-  if (!emailIsConfigured(env)) return reply({ error: "Configure o envio de e-mail no Cloudflare antes de enviar convites (RESEND_API_KEY e EMAIL_FROM)." }, 503);
   const d = await parseJson(request), email = String(d?.email || "").trim(), normalized = email.toLowerCase();
   if (email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return reply({ error: "Informe um e-mail válido." }, 400);
   const athlete = await env.DB.prepare("SELECT id,name,role FROM users WHERE email_normalized=?").bind(normalized).first();
@@ -29,11 +28,12 @@ export async function onRequestPost({ request, env }) {
   await env.DB.prepare("INSERT INTO athlete_invitations (id,trainer_id,athlete_id,email,email_normalized,token_hash,expires_at) VALUES (?,?,?,?,?,?,?)")
     .bind(id,user.user_id,athlete?.id || null,email,normalized,await sha256(token),expiresAt).run();
   const inviteUrl = baseUrl(request,env) + "/app.html#convite=" + encodeURIComponent(token);
-  try {
-    await sendAthleteInvitation(env,{to:email,trainerName:trainer?.name || "Seu treinador",inviteUrl,expiresAt,invitationId:id});
-  } catch (err) {
-    await env.DB.prepare("UPDATE athlete_invitations SET status='revoked' WHERE id=? AND status='pending'").bind(id).run();
-    return reply({ error: err.message || "Não foi possível enviar o convite." },502);
+  let sent = false;
+  if (emailIsConfigured(env)) {
+    try {
+      await sendAthleteInvitation(env,{to:email,trainerName:trainer?.name || "Seu treinador",inviteUrl,expiresAt,invitationId:id});
+      sent = true;
+    } catch {}
   }
-  return reply({ invitation:{id,email,expiresAt},sent:true },201);
+  return reply({ invitation:{id,email,expiresAt},sent,inviteUrl },201);
 }
