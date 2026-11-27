@@ -5,6 +5,45 @@
 body[data-role="athlete"] .sidebar{background:linear-gradient(180deg,#123b3b,#102b38)}
 body[data-role="athlete"] .nav-item.active{background:#39b89a24;box-shadow:inset 3px 0 #63ddbd}
 body[data-role="athlete"] .workspace-label{color:#8ecdbd}
+body[data-role="trainer"]{--navy:#152c25;--navy2:#203a30;--blue:#274a3e;--mint:#d3f265;--line:#dce2d6;--card:#fff;color:#172820;background:#edf0e8}
+body[data-role="trainer"] .sidebar{background:#152c25}
+body[data-role="trainer"] .nav-item{color:#e6f2e8}
+body[data-role="trainer"] .nav-item.active{color:#14281a;background:#d3f265;box-shadow:none}
+body[data-role="trainer"] .nav-item:hover{background:#ffffff15;color:#fff}
+body[data-role="trainer"] .nav-item.active:hover{background:#d3f265;color:#14281a}
+body[data-role="trainer"] .workspace{background:#edf0e8}
+body[data-role="trainer"] .trainer-week-banner{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:-4px 0 18px;padding:20px 22px;border:1px solid #cbd9ac;border-radius:14px;background:#dbe8bc;color:#172820}
+body[data-role="trainer"] .trainer-week-banner>div>span{font-size:9px;font-weight:750;letter-spacing:.13em;color:#506044}
+body[data-role="trainer"] .trainer-week-banner h2{margin:6px 0 4px;font:700 21px/1.2 Manrope,Inter,sans-serif;letter-spacing:-.035em}
+body[data-role="trainer"] .trainer-week-banner p{margin:0;color:#52624b;font-size:11px}
+body[data-role="trainer"] .trainer-week-banner .secondary-button{flex:none;border-color:#afbf91;color:#24352a;background:#f8faef}
+body[data-role="trainer"] .next-actions-card{border-color:#dce2d6;box-shadow:0 3px 14px #243a2b0b}
+body[data-role="trainer"] .action-total{background:#e5eed6;color:#31513f}
+body[data-role="trainer"] .next-action.feedback-action{border-color:#cfdbc4;background:#fff}
+body[data-role="trainer"] .action-mark{background:#e5eed6;color:#31584a}
+body[data-role="trainer"] .action-mark.pending{background:#f7e6d1;color:#754311}
+body[data-role="trainer"] .action-mark.draft{background:#ece3f4;color:#4f3567}
+body[data-role="trainer"] .next-action .primary-button{background:#274a3e;box-shadow:none}
+body[data-role="trainer"] .next-action .primary-button:hover{background:#1e3d33}
+@media(max-width:820px){
+ body[data-role="trainer"] .sidebar{inset:auto 0 0;width:auto;height:auto;padding:7px 8px calc(7px + env(safe-area-inset-bottom));transform:none;border-top:1px solid #29483d;box-shadow:0 -8px 24px #10243a18}
+ body[data-role="trainer"] .side-brand,body[data-role="trainer"] .workspace-label,body[data-role="trainer"] .sidebar-bottom{display:none}
+ body[data-role="trainer"] #main-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+ body[data-role="trainer"] #main-nav .nav-item{display:none;min-height:52px;padding:6px 4px;flex-direction:column;justify-content:center;gap:3px;text-align:center;font-size:9px}
+ body[data-role="trainer"] #main-nav .nav-item[data-page="dashboard"],body[data-role="trainer"] #main-nav .nav-item[data-page="calendar"],body[data-role="trainer"] #main-nav .nav-item[data-page="feedback"]{display:flex}
+ body[data-role="trainer"] #main-nav .nav-item>span{width:auto;font-size:17px;line-height:1}
+ body[data-role="trainer"] .sidebar.open{inset:0 auto 0 0;width:min(84vw,270px);height:100dvh;padding:20px 14px 14px;transform:none;overflow-y:auto;border-top:0;box-shadow:10px 0 30px #10243a38}
+ body[data-role="trainer"] .sidebar.open .side-brand,body[data-role="trainer"] .sidebar.open .workspace-label,body[data-role="trainer"] .sidebar.open .sidebar-bottom{display:flex}
+ body[data-role="trainer"] .sidebar.open .side-brand{flex-direction:column;align-items:flex-start}
+ body[data-role="trainer"] .sidebar.open .workspace-label{display:block}
+ body[data-role="trainer"] .sidebar.open #main-nav{grid-template-columns:1fr;gap:5px}
+ body[data-role="trainer"] .sidebar.open #main-nav .nav-item{display:flex;min-height:42px;padding:11px 12px;flex-direction:row;justify-content:flex-start;gap:12px;text-align:left;font-size:12px}
+ body[data-role="trainer"] .sidebar.open #main-nav .nav-item>span{width:18px;font-size:17px}
+ body[data-role="trainer"] .sidebar.open .sidebar-bottom{display:block}
+ body[data-role="trainer"] .page-content{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+ body[data-role="trainer"] .trainer-week-banner{padding:16px}
+}
+@media(max-width:640px){body[data-role="trainer"] .trainer-week-banner{align-items:flex-start;flex-direction:column;gap:12px}body[data-role="trainer"] .trainer-week-banner .secondary-button{width:100%}}
 .next-actions-card{margin-bottom:18px;padding:21px}
 .next-actions-card>.surface-head{margin-bottom:12px}
 .next-actions-card .surface-head>div>p,.dashboard-grid .surface-head>div>p{margin:5px 0 0;color:#8390a0;font-size:10px}
